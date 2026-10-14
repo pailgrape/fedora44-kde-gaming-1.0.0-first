@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "FIRST: Fedora gaming setup dry run",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/fedora44-kde-gaming-1.1.0-fork/bin/fedora44-kde-gaming-setup.sh",
+                "--dry-run"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/fedora44-kde-gaming-1.1.0-fork"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

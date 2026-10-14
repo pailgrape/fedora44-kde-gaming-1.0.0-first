@@ -1,0 +1,25 @@
+FIRST — Commercial license (release 1, "first")
+Copyright (c) 2026 the seller of this copy. All rights reserved.
+
+Replace "the seller of this copy" with your legal name before distribution.
+
+Grant
+  A paid copy of FIRST 1.0.0 may be installed and run on machines the
+  buyer owns or administers. One purchase covers one operator unless
+  the receipt says otherwise.
+
+Restrictions
+  No redistribution of the archive, scripts, or a relabeled build.
+  No sublicensing. No warranty.
+
+Disclaimer
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING FITNESS FOR A PARTICULAR PURPOSE.
+  NVIDIA driver and Secure Boot enrollment remain the operator's job.
+  Kernel anti-cheat games are out of scope.
+
+Mark
+  This file ships only with the archive labeled:
+    product: FIRST
+    version: 1.0.0
+    release-label: first

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Steam Gaming
+GenericName=Steam on Plasma
+Comment=Load the Fedora 44 Plasma gaming session, then open Steam
+Exec=bash -lc 'test -x "$HOME/Desktop/run/fedora44-kde-gaming-1.0.0-first/fedora44-kde-gaming-1.0.0-first/bin/plasma-game-session.sh" && "$HOME/Desktop/run/fedora44-kde-gaming-1.0.0-first/fedora44-kde-gaming-1.0.0-first/bin/plasma-game-session.sh"; exec gamemoderun steam'
+Icon=steam
+Terminal=false
+Categories=Game;
+OnlyShowIn=KDE
+StartupNotify=true
+Path=/home/admin/Desktop/run/fedora44-kde-gaming-1.0.0-first/fedora44-kde-gaming-1.0.0-first
