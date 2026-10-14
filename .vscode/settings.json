@@ -1,4 +1,7 @@
 {
+    "chat.disableAIFeatures": false,
+    "chat.useAgentsMdFile": true,
+    "chat.useNestedAgentsMdFiles": true,
     "python.testing.pytestArgs": [
         "overdone_-dry_run"
     ],
