@@ -1,0 +1,23 @@
+{
+  "name": "Fedora 44 KDE gaming workspace",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "timonwong.shellcheck",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv-fedora44/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": "python3 -m venv .venv-fedora44",
+  "postStartCommand": "python3 --version && git --version && dnf --version | head -n 1"
+}

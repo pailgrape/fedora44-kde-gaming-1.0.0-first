@@ -25,3 +25,51 @@ After reboot:
 ```
 
 Desktop icon is copied by `./install.sh` to ~/Desktop/Steam-Gaming.desktop.
+
+## Package sets
+
+The installer uses Fedora DNF for the system gaming stack:
+
+- Multimedia groups and Vulkan/VA-API support: `@"Multimedia"`, `@"Sound and Video"`,
+  `vulkan-tools`, `vulkan-loader`, `vulkan-validation-layers`,
+  `mesa-vulkan-drivers`, `mesa-vulkan-drivers.i686`, and `libva-utils`.
+- Gaming tools: `gamemode`, `mangohud`, `goverlay`, `gamescope`, `wine`,
+  `wine-ntsync`, `winetricks`, `lutris`, `steam`, `kdialog`, and `qt6-qtbase`.
+- NVIDIA packages are selected by detection: `akmod-nvidia` (or
+  `akmod-nvidia-open`), `xorg-x11-drv-nvidia-cuda`, `nvidia-vaapi-driver`, and
+  `xorg-x11-drv-nvidia-libs.i686` and `nvidia-vaapi-driver.i686` for 32-bit apps.
+- AMD uses Mesa with optional `mesa-va-drivers-freeworld` and
+  `mesa-vdpau-drivers-freeworld` swaps; Intel adds `intel-media-driver` and
+  `libva-intel-driver`.
+- Optional Flathub IDs: `com.heroicgameslauncher.hgl`,
+  `net.davidotek.pupgui2`, and `com.discordapp.Discord`.
+
+These are Fedora runtime packages, not Python dependencies. The analysis tool's
+Python dependencies (`torch` and `numpy`) are listed separately in
+[`overdone_-dry_run/requirements.txt`](../overdone_-dry_run/requirements.txt).
+To run the analysis in Codespaces, install them into `.venv-fedora44` with:
+
+```bash
+.venv-fedora44/bin/python -m pip install -r overdone_-dry_run/requirements.txt
+```
+
+## Setup function inventory
+
+The maintained setup script is [`bin/fedora44-kde-gaming-setup.sh`](bin/fedora44-kde-gaming-setup.sh).
+Its functions are:
+
+- `log`, `run`, `retry`, `run_net`: timestamped logging, command execution,
+  retries, and network-operation handling.
+- `clear_stale_dnf`, `need_cmd`, `confirm_fedora`, `detect_gpu`: package-manager
+  preparation and host/GPU checks.
+- `enable_rpmfusion`, `install_codecs_and_base`, `install_gpu_stack`,
+  `install_flatpaks`: repositories and system/optional package installation.
+- `write_gamemode_ini`, `write_mangohud_conf`, `write_kwin_vrr`,
+  `install_launchers`: user configuration and launcher setup.
+- `load_ntsync`, `enable_gamemode`, `verify`: runtime setup and verification.
+- `main`: parses options and runs the setup steps in order.
+
+See the [analysis report](../overdone_-dry_run/Analysis_Complete.md) for
+measured line, comment, function, and package-command counts. The Codespaces
+container is a Fedora 44 command-line/test environment; it does not provide a
+KDE desktop, gaming GPU, or permission to install the host gaming stack.
