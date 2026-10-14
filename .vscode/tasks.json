@@ -55,7 +55,7 @@
             "command": "bash",
             "args": [
                 "-lc",
-                "set -e; python='${workspaceFolder}/.venv-fedora44/bin/python'; \"$python\" -m pip install numpy; \"$python\" -m pip install torch --index-url https://download.pytorch.org/whl/cpu"
+                "set -e; python='${workspaceFolder}/.venv-fedora44/bin/python'; \"$python\" -m pip install --no-cache-dir numpy; \"$python\" -m pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

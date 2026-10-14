@@ -76,8 +76,8 @@ To regenerate the analysis report against the maintained setup script, first
 install the analysis-only Python packages if needed, then run:
 
 ```bash
-.venv-fedora44/bin/python -m pip install numpy
-.venv-fedora44/bin/python -m pip install torch \
+.venv-fedora44/bin/python -m pip install --no-cache-dir numpy
+.venv-fedora44/bin/python -m pip install --no-cache-dir torch \
   --index-url https://download.pytorch.org/whl/cpu
 cd overdone_-dry_run
 ../.venv-fedora44/bin/python -m master.pytorch_analyzer --dry-run \
@@ -94,9 +94,10 @@ the report from the maintained source, install PyTorch and NumPy with the
 dependency task first, then run **FIRST: Refresh PyTorch analysis report**.
 The analysis packages are not installed automatically because PyTorch is a
 large optional dependency. The task selects CPU-only PyTorch to avoid CUDA
-downloads, but installation still requires several hundred megabytes of free
-Codespace storage. If it runs out of space, increase the Codespace storage
-allocation or use a workspace with more free disk before retrying.
+downloads and disables the pip cache to save space. Installation still needs
+substantial free Codespace storage: the current Codespace had under 800 MiB
+free and the install ran out of space. Increase its storage allocation or free
+additional disk before retrying.
 
 ## Keep the outer repository as the push target
 
