@@ -73,3 +73,6 @@ See the [analysis report](../overdone_-dry_run/Analysis_Complete.md) for
 measured line, comment, function, and package-command counts. The Codespaces
 container is a Fedora 44 command-line/test environment; it does not provide a
 KDE desktop, gaming GPU, or permission to install the host gaming stack.
+For instructions on opening the Codespace and using the report as Copilot Chat
+context when making package changes, see the repository's
+[analysis report workflow guide](../analysis_report.md).
