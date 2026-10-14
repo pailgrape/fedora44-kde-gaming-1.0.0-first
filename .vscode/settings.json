@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestArgs": [
+        "overdone_-dry_run"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
