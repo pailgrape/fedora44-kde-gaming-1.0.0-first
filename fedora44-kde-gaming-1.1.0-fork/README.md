@@ -76,3 +76,7 @@ KDE desktop, gaming GPU, or permission to install the host gaming stack.
 For instructions on opening the Codespace and using the report as Copilot Chat
 context when making package changes, see the repository's
 [analysis report workflow guide](../analysis_report.md).
+The Codespace edits and validates the maintained source in the outer Git
+repository. Commit and push the current branch to that repository's `origin`,
+then merge reviewed changes into `master`; the container itself is not a Git
+branch or a separate push destination.

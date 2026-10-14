@@ -4,6 +4,9 @@
 
 - This repository contains Fedora developer-portal content and Fedora 44 KDE gaming setup artifacts; it is not currently an issues API service or a web UI project. Confirm that the target code exists before implementing a feature.
 - The maintained gaming package source is under [`fedora44-kde-gaming-1.1.0-fork/`](fedora44-kde-gaming-1.1.0-fork/). The checked-in ZIP and tar files are release snapshots; do not regenerate or distribute updated archives until the release license is corrected and authorized.
+- The outer repository at the workspace root is the canonical Git remote for the gaming package. `overdone_-dry_run/` is analysis source/report content tracked by this repository, not a separate push target. Make package edits in the maintained source, commit from the root repo, and push the current root branch to `origin`; do not push analysis files to a second remote.
+- The Codespace is an authoring and command-line validation environment, not a master branch or a gaming desktop. Use its Fedora 44 package-check task for syntax, ShellCheck, and dry-run validation. Merge reviewed changes into the remote `master` branch through the repository's normal review process.
+- The optional report refresh task needs PyTorch and NumPy in `.venv-fedora44`; use the CPU-only PyTorch dependency task to avoid CUDA downloads. Do not install analysis dependencies automatically in the image because they are large and may exceed Codespace storage.
 - Treat Fedora 44 KDE Plasma on Wayland as the gaming environment. The Fedora system is already built; do not rebuild or reprovision it unless explicitly asked.
 - The existing gaming setup reference is [`overdone_-dry_run/master/original_setup.sh`](overdone_-dry_run/master/original_setup.sh). Its launcher runs Steam inside nested Gamescope and enables MangoHud, alongside GameMode.
 

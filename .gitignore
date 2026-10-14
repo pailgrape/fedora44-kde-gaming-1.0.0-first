@@ -9,3 +9,5 @@ content
 *~
 .venv/
 .venv-fedora44/
+overdone_-dry_run/.venv/
+overdone_-dry_run/**/__pycache__/

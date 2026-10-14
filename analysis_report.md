@@ -16,10 +16,13 @@ the development container from:
   and `sudo`.
 
 Create or reopen a Codespace for this repository and branch. Codespaces reads
-those files, builds the image, mounts the repository into it, and creates the
-`.venv-fedora44` Python environment. The container provides a Fedora 44
-workspace; it is not a KDE desktop, does not expose a gaming GPU, and does not
-install the gaming package onto the host.
+those files, builds the image, mounts the **outer Fedora gaming repository**
+into it, and creates the `.venv-fedora44` Python environment. The outer
+repository's `origin` is the only push target for package and report changes;
+the analysis files are ordinary tracked files in that repository, not a
+separate Git repository. The container provides a Fedora 44 workspace; it is
+not a KDE desktop, does not expose a gaming GPU, and does not install the
+gaming package onto the host.
 
 ## Use the report to guide package work
 
@@ -37,7 +40,9 @@ install the gaming package onto the host.
 4. Review the proposed diff. Keep changes in the maintained package source at
    [`fedora44-kde-gaming-1.1.0-fork/`](fedora44-kde-gaming-1.1.0-fork/), update
    related documentation, and validate them before committing.
-5. Use GitHub's normal review and commit flow after checking the changes.
+5. Work in the outer repository root and use its current branch. Commit and
+   push that branch to the outer repository's `origin`, then use GitHub's
+   normal review flow to merge it into `master`.
    Attaching the report does not automatically approve, apply, or publish
    changes.
 
@@ -71,7 +76,9 @@ To regenerate the analysis report against the maintained setup script, first
 install the analysis-only Python packages if needed, then run:
 
 ```bash
-.venv-fedora44/bin/python -m pip install -r overdone_-dry_run/requirements.txt
+.venv-fedora44/bin/python -m pip install numpy
+.venv-fedora44/bin/python -m pip install torch \
+  --index-url https://download.pytorch.org/whl/cpu
 cd overdone_-dry_run
 ../.venv-fedora44/bin/python -m master.pytorch_analyzer --dry-run \
   --script ../fedora44-kde-gaming-1.1.0-fork/bin/fedora44-kde-gaming-setup.sh
@@ -80,6 +87,26 @@ cd overdone_-dry_run
 The setup dry-run previews commands and does not install packages. Do not use
 the non-dry-run installer in Codespaces as a substitute for testing on the
 intended Fedora 44 KDE system.
+
+Use **Terminal → Run Test Task → FIRST: Fedora 44 package checks** to run
+`bash -n`, ShellCheck, and the no-side-effect setup dry-run together. To refresh
+the report from the maintained source, install PyTorch and NumPy with the
+dependency task first, then run **FIRST: Refresh PyTorch analysis report**.
+The analysis packages are not installed automatically because PyTorch is a
+large optional dependency. The task selects CPU-only PyTorch to avoid CUDA
+downloads, but installation still requires several hundred megabytes of free
+Codespace storage. If it runs out of space, increase the Codespace storage
+allocation or use a workspace with more free disk before retrying.
+
+## Keep the outer repository as the push target
+
+Codespaces does not make its container the Git master. Git's branch and remote
+determine where changes sync. The workspace root must be the
+`fedora44-kde-gaming-1.0.0-first` repository, whose `origin` points to the
+owner's Fedora gaming repository. Use `git status` and `git remote -v` from
+the workspace root before syncing. Commit and push the current Codespace
+branch to that `origin`; review and merge it into the remote `master` branch
+through GitHub. Do not run Git sync from a nested analysis repository.
 
 ## Setup script function guide
 

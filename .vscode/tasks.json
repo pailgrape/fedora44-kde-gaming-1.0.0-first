@@ -17,6 +17,50 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "FIRST: Fedora 44 package checks",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "set -e; script='${workspaceFolder}/fedora44-kde-gaming-1.1.0-fork/bin/fedora44-kde-gaming-setup.sh'; bash -n \"$script\"; shellcheck -S warning \"$script\"; bash \"$script\" --dry-run"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "FIRST: Refresh PyTorch analysis report",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv-fedora44/bin/python",
+            "args": [
+                "-m",
+                "master.pytorch_analyzer",
+                "--dry-run",
+                "--script",
+                "${workspaceFolder}/fedora44-kde-gaming-1.1.0-fork/bin/fedora44-kde-gaming-setup.sh"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/overdone_-dry_run"
+            },
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "FIRST: Install PyTorch analysis dependencies",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "set -e; python='${workspaceFolder}/.venv-fedora44/bin/python'; \"$python\" -m pip install numpy; \"$python\" -m pip install torch --index-url https://download.pytorch.org/whl/cpu"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
         }
     ]
 }
